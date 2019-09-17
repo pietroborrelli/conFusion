@@ -10,6 +10,7 @@ import { Dish } from '../shared/dish';
 
 export class DishdetailComponent implements OnInit {
 
+  //input to retrieve the property passed from a component INTO this component
   @Input()
   dish: Dish;
   
