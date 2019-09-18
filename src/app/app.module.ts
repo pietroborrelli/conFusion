@@ -18,6 +18,8 @@ import 'hammerjs';
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
 
+import { DishService } from './services/dish.service';
+
 //NgModule is a decorator is a function that modifies Javascript classes
 //we'll use more decorators
 //inside there are metadatas 
@@ -41,8 +43,10 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
     MatCardModule,
     MatButtonModule
   ],
-  //providera specify all the services that this particular module will make use of.
-  providers: [],
+  //providera specify all the services that this particular module will make use of. (through DI)
+  providers: [
+    DishService
+  ],
   //bootstrap the application with the AppComponent (=root component)
   bootstrap: [AppComponent]
 })
