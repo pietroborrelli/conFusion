@@ -17,10 +17,17 @@ import 'hammerjs';
 //automaticcaly added when this component is created and can be used in the application
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
-
-import { DishService } from './services/dish.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+
+//services
+import { DishService } from './services/dish.service';
+
+//new modules
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 //NgModule is a decorator is a function that modifies Javascript classes
 //we'll use more decorators
@@ -33,7 +40,10 @@ import { FooterComponent } from './footer/footer.component';
     MenuComponent,
     DishdetailComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    AboutComponent,
+    ContactComponent
   ],
   //all these modules need to be imported to be used with this app module. So this app module now depends upon these other modules.
   //So when you import the modules, you are specifying here saying that the app module will make use of this module
@@ -45,7 +55,8 @@ import { FooterComponent } from './footer/footer.component';
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    AppRoutingModule
   ],
   //providera specify all the services that this particular module will make use of. (through DI)
   providers: [
