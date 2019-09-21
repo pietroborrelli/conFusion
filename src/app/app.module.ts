@@ -25,6 +25,8 @@ import { ContactComponent } from './contact/contact.component';
 
 //services
 import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
+
 
 //new modules
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -58,9 +60,10 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatButtonModule,
     AppRoutingModule
   ],
-  //providera specify all the services that this particular module will make use of. (through DI)
+  //providers specify all the services that this particular module will make use of. (through DI)
   providers: [
-    DishService
+    DishService,
+    PromotionService
   ],
   //bootstrap the application with the AppComponent (=root component)
   bootstrap: [AppComponent]
@@ -68,3 +71,4 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 
 //typescript has support for classes
 export class AppModule { }
+ 
