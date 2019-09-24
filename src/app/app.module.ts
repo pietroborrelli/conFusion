@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
@@ -30,6 +31,7 @@ import { LeaderService } from './services/leader.service';
 
 //new modules
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 //NgModule is a decorator is a function that modifies Javascript classes
 //we'll use more decorators
@@ -45,7 +47,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   //all these modules need to be imported to be used with this app module. So this app module now depends upon these other modules.
   //So when you import the modules, you are specifying here saying that the app module will make use of this module
@@ -58,7 +61,12 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
+  ],
+  //enable component to be used on top of the screen by overlying
+  entryComponents: [
+    LoginComponent
   ],
   //providers specify all the services that this particular module will make use of. (through DI)
   providers: [
