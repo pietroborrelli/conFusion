@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
   constructor(private dishService: DishService) { }
 
   //override of OnInit's method
-  //wheneer the component is instanciated this method is executed
+  //whenever the component is instanciated this method is executed
   ngOnInit() {
     this.dishes = this.dishService.getDishes();
   }
