@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
 
 import 'hammerjs';
@@ -76,7 +76,8 @@ import { LoginComponent } from './login/login.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
-    MatSelectModule 
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   //To make this component be opened from another component
   //and enable component to be used on top of the screen by overlying
