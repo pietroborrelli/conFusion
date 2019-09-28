@@ -20,7 +20,9 @@ export class MenuComponent implements OnInit {
   //override of OnInit's method
   //whenever the component is instanciated this method is executed
   ngOnInit() {
-    this.dishes = this.dishService.getDishes();
+    this.dishService.getDishes()
+    //funzione a freccia (dishes) che è ciò che ritorna dal premise, viene passato come parametro a quello che c'è dopo la freccia
+      .then((dishes) => this.dishes = dishes);
   }
 
   onSelect (dish: Dish){

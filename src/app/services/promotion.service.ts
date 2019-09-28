@@ -10,17 +10,17 @@ export class PromotionService {
   constructor() { }
 
   //supply an array of dishes every where in the application
-  getPromotions(): Promotion[]{
-    return PROMOTIONS;
+  getPromotions(): Promise<Promotion[]>{
+    return Promise.resolve(PROMOTIONS);
   }
 
-  getPromotion(id: string): Promotion{
+  getPromotion(id: string): Promise<Promotion>{
     // arrow function
-    return PROMOTIONS.filter((promo) => promo.id === id )[0];
+    return Promise.resolve(PROMOTIONS.filter((promo) => promo.id === id )[0]);
   }
 
-  getFeaturedPromotion(): Promotion{
-    return PROMOTIONS.filter((promotion) => promotion.featured)[0];
+  getFeaturedPromotion(): Promise<Promotion>{
+    return Promise.resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]);
   }
 
 }

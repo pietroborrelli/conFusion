@@ -12,17 +12,19 @@ export class DishService {
   constructor() { }
 
   //supply an array of dishes every where in the application
-  getDishes(): Dish[]{
-    return DISHES;
+  getDishes(): Promise<Dish[]>{
+    //fast promise declaration (it returns dishes for sure because it is in the client)
+    //later will be simulated a delay that may be returned by a server
+    return Promise.resolve(DISHES);
   }
 
-  getDish(id: string): Dish{
+  getDish(id: string): Promise<Dish>{
     // arrow function
-    return DISHES.filter((dish) =>  dish.id == id )[0];
+    return Promise.resolve(DISHES.filter((dish) =>  dish.id == id )[0]);
   }
 
-  getFeaturedDish(): Dish{
-    return DISHES.filter((dish) => dish.featured )[0];
+  getFeaturedDish(): Promise<Dish>{
+    return Promise.resolve(DISHES.filter((dish) => dish.featured )[0]);
   }
 }
 
