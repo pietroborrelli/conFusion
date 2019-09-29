@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.dishService.getDishes()
     //funzione a freccia (dishes) che è ciò che ritorna dal premise, viene passato come parametro a quello che c'è dopo la freccia
-      .then((dishes) => this.dishes = dishes);
+      .subscribe((dishes) => this.dishes = dishes);
   }
 
   onSelect (dish: Dish){
