@@ -3,6 +3,9 @@ import { Dish } from '../shared/dish';
 import { DISHES } from '../shared/dishes';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { baseURL } from '../shared/baseurl';
 
 //makes this object injectable in our application
 @Injectable({
@@ -10,7 +13,7 @@ import { delay } from 'rxjs/operators';
 })
 export class DishService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   //supply an array of dishes every where in the application
   getDishes(): Observable<Dish[]>{
@@ -22,23 +25,28 @@ export class DishService {
     //   });
 
     //update: return a promise from an observable
-    return of(DISHES).pipe(delay(2000));
+    //return of(DISHES).pipe(delay(2000));
 
+    //update: return the dishes calling a remote server
+    return this.http.get<Dish[]>(baseURL + 'dishes');
 
   }
 
-  getDish(id: string): Observable<Dish>{
+  getDish(id: number): Observable<Dish>{
     // arrow function
-    return of(DISHES.filter((dish) =>  dish.id == id )[0]).pipe(delay(2000));
+    //return of(DISHES.filter((dish) =>  dish.id == id )[0]).pipe(delay(2000));
+    //update return the dish calling a remote server
+    return this.http.get<Dish>(baseURL + 'dishes/' + id);
 
   }
 
   getFeaturedDish(): Observable<Dish>{
-    return of (DISHES.filter((dish) => dish.featured )[0]).pipe(delay(2000));
+    //with query parameter
+    return this.http.get<Dish[]>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]));
   }
 
-  getDishIds(): Observable<string[] | any>{
-    return of(DISHES.map(dish => dish.id));
+  getDishIds(): Observable<number[] | any> {
+    return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)));
   }
 }
 

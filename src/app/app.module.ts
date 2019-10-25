@@ -19,6 +19,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
+import {MatSliderModule} from '@angular/material/slider';
+import {HttpClientModule} from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import 'hammerjs';
 
@@ -39,6 +42,9 @@ import { LeaderService } from './services/leader.service';
 //new modules
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
+
+//base url for httpclient exercise
+import { baseURL } from './shared/baseurl';
 
 //NgModule is a decorator is a function that modifies Javascript classes
 //we'll use more decorators
@@ -77,7 +83,10 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule,
+    HttpClientModule,
+    HttpModule
   ],
   //To make this component be opened from another component
   //and enable component to be used on top of the screen by overlying
@@ -88,7 +97,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    {provide: 'BaseURL', useValue: baseURL}
   ],
   //bootstrap the application with the AppComponent (=root component)
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Leader } from '../shared/Leader';
+import { Leader } from '../shared/leader';
 import { LeaderService} from '../services/leader.service';
 
 @Component({
