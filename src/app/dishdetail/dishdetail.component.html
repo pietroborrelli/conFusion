@@ -80,10 +80,14 @@
           </mat-card>
         </div>
   </div>
-  <div fxFlex [hidden]="dish">
+  <div fxFlex [hidden]="dish || errMess">
       <mat-spinner>
       </mat-spinner>
       <h4>Loading . . . Please wait</h4>
   </div>
-
+    <!--show error-->
+    <div fxFlex *ngIf="errMess">
+      <h2>Error</h2>
+      <h4>{{errMess}}</h4>
+    </div>
 </div>

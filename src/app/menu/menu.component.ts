@@ -12,6 +12,7 @@ import { DishService } from '../services/dish.service';
 export class MenuComponent implements OnInit {
 
   dishes: Dish[];
+  errMess: string;
 
   //dish service will be available into the menu component (thanks to DI)
   constructor(@Inject('BaseURL') public BaseURL:string, private dishService: DishService) { }
@@ -20,7 +21,9 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.dishService.getDishes()
     //funzione a freccia (dishes) che è ciò che ritorna dal premise, viene passato come parametro a quello che c'è dopo la freccia
-      .subscribe((dishes) => this.dishes = dishes);
+    //Se l'observable che ritorna è un valore, gestito dalla prima funzione, altrimenti nella seconda funzione viene catturato l'errore e inizializzato nella variabile errMess
+      .subscribe((dishes) => this.dishes = dishes,
+        errmess => this.errMess = <any> errmess);
   }
 
   

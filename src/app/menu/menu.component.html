@@ -18,12 +18,17 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  <!--spinner displayed only if dishes is null-->
-  <div fxFlex [hidden]="dishes">
+  <!--spinner displayed only if dishes is null and the errMess is null-->
+  <div fxFlex [hidden]="dishes || errMess">
     <mat-spinner></mat-spinner>
     <h4>Loading . . . Please wait</h4>
   </div>
   <!-- selected dish of menu component is passed to the dish property of the dishdetail component
   <app-dishdetail [dish]="selectedDish"></app-dishdetail>-->
 
+  <!--show error-->
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
 </div>
