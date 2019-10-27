@@ -5,6 +5,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run an ng serve command into the app folder of conFusion.
+Resources are provided by a json-server. So install it: 
+sudo npm install -g json-server.
+Then Run a 'json-server --watch db.json -d 2000' command into the installation folder. --watch means that every updated on db.json file is published and exposed by the server. -d 2000 simulates the delay of a http response (2000 ms = 2 seconds) 
 
 ## Code scaffolding
 
