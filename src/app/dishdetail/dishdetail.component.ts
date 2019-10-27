@@ -24,6 +24,7 @@ export class DishdetailComponent implements OnInit {
   prev: string;
   next: string;
   errMess: string;
+  dishcopy: Dish;
   @ViewChild('fform') dishDetailFormDirective;
 
     //tracks the current errors
@@ -52,9 +53,9 @@ export class DishdetailComponent implements OnInit {
 
   ngOnInit() {
       this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
-      //wehn route parameter change value, then the new dish is updated. Observable on the URL param
+      //wehn route parameter change value, then the new dish is updated. Observable on the URL param and initialize a copy used to be put into the dish collection
       this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+      .subscribe(dish => { this.dish = dish; this.dishcopy=dish; this.setPrevNext(dish.id); },
         errmess => this.errMess = <any>errmess );
       this.createForm();
   }
@@ -109,7 +110,16 @@ export class DishdetailComponent implements OnInit {
     var date = new Date();
     var dateISO = date.toISOString();
     this.comment.date = dateISO;
-    this.dish.comments.push(this.comment);
+    this.dishcopy.comments.push(this.comment);
+    //send the updated copy of the dish
+    this.dishservice.putDish(this.dishcopy)
+    //when the server replies
+      .subscribe(dish => {
+        //UI will be updated with the new updated dish
+        this.dish = dish;
+        this.dishcopy = dish;
+      },
+      errmess => {this.dish=null; this.dishcopy=null, this.errMess = <any>this.errMess;});
     this.dishDetailFormDirective.resetForm();
     this.dishDetailForm.reset({
       author:'',
