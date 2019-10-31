@@ -1,10 +1,20 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType} from '../shared/feedback';
+import {flyInOut} from '../animations/app.animation';
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  // component will now start animating when I route into the menu component, and then also when I leave the menu component
+  host: {
+    '[@flyInOut]':'true',
+    'style': 'display:block;'
+  },
+  animations:[
+    flyInOut()
+  ]
 })
 export class ContactComponent implements OnInit {
 

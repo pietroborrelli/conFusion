@@ -6,25 +6,22 @@ import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { visibility,flyInOut,expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'],
-  animations: [
-    trigger('visibility', [
-      state('shown',style({
-        transform: 'scale(1.0)',
-        opacity:1
-      })),
-      state('hidden', style({
-        transform: 'scale(0.5)',
-        opacity:0
-      })),
-      //transition between the two states in any case
-      transition('* => *', animate ('0.5s ease-in-out'))
-    ])
+  // component will now start animating when I route into the menu component, and then also when I leave the menu component
+  host: {
+    '[@flyInOut]':'true',
+    'style': 'display:block;'
+  },
+  animations:[
+    flyInOut(),
+    //visibility is exported from the app.animations.ts that I have created
+    visibility(),
+    expand()
   ]
 })
 
