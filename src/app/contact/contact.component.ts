@@ -1,7 +1,8 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType} from '../shared/feedback';
-import {flyInOut} from '../animations/app.animation';
+import {flyInOut, expand} from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
@@ -13,7 +14,8 @@ import {flyInOut} from '../animations/app.animation';
     'style': 'display:block;'
   },
   animations:[
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
@@ -21,8 +23,11 @@ export class ContactComponent implements OnInit {
   //it will contain the reactive form
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackcopy: Feedback;
   contactType = ContactType;
   @ViewChild('fform') feedbackFormDirective;
+  errMess: string;
+  show:boolean;
   
   //tracks the current errors
   formErrors = {
@@ -53,7 +58,9 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder,
+    private feedbackService: FeedbackService) {
+    this.feedbackcopy=null; 
     this.createForm();
    }
 
@@ -76,6 +83,10 @@ export class ContactComponent implements OnInit {
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged(); // (re)set validation messages now
+    this.show=true;
+
+    console.log('feedback copy: ' + this.feedbackcopy);
+    console.log(this.errMess);
   }
 
   onValueChanged(data?: any) {
@@ -102,6 +113,21 @@ export class ContactComponent implements OnInit {
   onSubmit(){
     this.feedback=this.feedbackForm.value;
     console.log(this.feedback);
+    this.show=false;
+    this.feedbackService.submitFeedback(this.feedback)
+          //when the server replies
+          .subscribe(feedback => {
+            this.feedback = null;
+            this.feedbackcopy = feedback;
+
+            console.log("starting five seconds...");
+            setTimeout(() => {
+              this.feedbackcopy=null;
+              this.show=true;
+            }, 5000);
+
+          },
+          errmess => {this.feedback=null; this.feedbackcopy = null; this.errMess = <any>this.errMess;});
     this.feedbackForm.reset({
       firstname:'',
       lastname:'',
@@ -112,6 +138,9 @@ export class ContactComponent implements OnInit {
       message:''
     });
     this.feedbackFormDirective.resetForm();
+
+    
+
   }
 
 }

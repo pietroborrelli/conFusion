@@ -67,7 +67,7 @@ export class DishdetailComponent implements OnInit {
   ngOnInit() {
       this.dishservice.getDishIds()
         .subscribe(dishIds => this.dishIds = dishIds);
-      //wehn route parameter change value, then the new dish is updated. Observable on the URL param and initialize a copy used to be put into the dish collection
+      //when route parameter change value, then the new dish is updated. Observable on the URL param and initialize a copy used to be put into the dish collection
       this.route.params
         .pipe(switchMap((params: Params) => {this.visibility='hidden'; return this.dishservice.getDish(params['id']);}))
         //when dish becomes available , it is restored the visibility
@@ -98,6 +98,8 @@ export class DishdetailComponent implements OnInit {
     .subscribe(data => this.onValueChanged(data));
 
   this.onValueChanged(); // (re)set validation messages now
+
+  console.log(this.dish);
   }
 
   onValueChanged(data?: any) {
